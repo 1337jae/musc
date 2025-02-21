@@ -1,0 +1,399 @@
+/* ===================== */
+/* Global Styles */
+/* ===================== */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  font-family: 'Fira Code', monospace;
+  min-height: 100vh;
+}
+
+/* ===================== */
+/* Container & Layout */
+/* ===================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  animation: fadeIn 1s ease-out;
+}
+
+/* ===================== */
+/* Header Styles */
+/* ===================== */
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+  /* Enhanced logo pulse animation with rotation and bobbing */
+  animation: enhancedLogoPulse 5s ease-in-out infinite;
+  transition: transform 0.3s ease; /* Smooth hover transition */
+}
+
+.logo:hover {
+  transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+h1 {
+  font-size: 48px;
+  margin: 0;
+  background: linear-gradient(90deg, #ffffff, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.animated-title {
+  animation: colorCycle 10s linear infinite, fadeInText 2s ease-out forwards;
+  opacity: 0; /* Initially hidden for fade-in effect */
+}
+
+/* ===================== */
+/* Button Styles */
+/* ===================== */
+.button-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  background-size: 200% auto;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transform and shadow */
+  /* Animate gradient shift */
+  animation: gradientShift 5s linear infinite;
+  position: relative; /* For ripple effect positioning */
+  overflow: hidden; /* Clip ripple effect */
+}
+
+.btn:hover {
+  transform: scale(1.08) translateY(-3px); /* Slightly scale up and lift on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+  animation: gradientShift 5s linear infinite, buttonWobble 1s ease-in-out infinite alternate; /* Wobble on hover */
+}
+
+.btn:active {
+  transform: scale(0.98); /* Slightly press down on click */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Reduced shadow when pressed */
+}
+
+.btn-discord {
+  background: linear-gradient(90deg, #7289da, #677bc4);
+  background-size: 200% auto;
+  animation: gradientShift 5s linear infinite;
+}
+
+/* Ripple effect for buttons */
+.btn::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 0;
+  height: 0;
+  padding: 100%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: width 0.5s ease-out, height 0.5s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.btn:active::after {
+  width: 150%;
+  height: 150%;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+/* ===================== */
+/* Content Section */
+/* ===================== */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* ===================== */
+/* Editor & Minimap */
+/* ===================== */
+.editor-container {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.editor {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  animation: slideIn 0.8s ease-out;
+}
+
+/* ----- Line Numbers ----- */
+.line-numbers {
+  width: 40px;
+  padding-right: 12px;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  user-select: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  margin-right: 12px;
+}
+
+.line-numbers div {
+  line-height: 21px;
+  margin-bottom: 4px;
+}
+
+/* ----- Code Content ----- */
+.code-content {
+  flex: 1;
+  position: relative;
+}
+
+pre {
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+}
+
+code {
+  font-size: 14px;
+  line-height: 1.5;
+  background: transparent !important;
+  caret-color: white; /* Cursor color in editor */
+  white-space: pre-wrap; /* Ensure spaces are respected in minimap */
+}
+
+/* ----- Prism & Minimap ----- */
+.language-lua {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 10px;
+}
+
+.prism-editor {
+  position: relative;
+  width: 100%;
+  tab-size: 4;
+  background: transparent !important;
+}
+
+.minimap {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin-left: 20px;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+  font-size: 8px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.6);
+  animation: fadeIn 1s ease-out;
+  display: flex; /* Enable flex layout for minimap */
+  flex-direction: column; /* Stack line numbers and code vertically */
+  max-height: 400px; /* Match editor height or adjust as needed */
+  overflow-y: auto; /* Enable vertical scroll if content overflows */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.minimap pre {
+  margin: 0;
+  padding: 0;
+  white-space: pre-wrap;
+  flex: 1; /* Allow minimap code to take remaining space */
+  overflow-x: hidden; /* Ensure code wraps and doesn't cause horizontal scroll */
+}
+
+/* Adjust minimap pre to handle Prism.js output */
+.minimap pre code {
+  font-size: 8px; /* Match minimap font size */
+  line-height: 1.2; /* Match minimap line height */
+  font-family: 'Fira Code', monospace; /* Ensure font consistency */
+  display: block; /* Ensure proper wrapping and layout */
+  white-space: pre-wrap; /* Keep pre formatting for Prism output, use pre-wrap for wrapping */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+}
+
+/* ===================== */
+/* Stars Background */
+/* ===================== */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 1s infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* ===================== */
+/* FAQ Section */
+/* ===================== */
+.faq {
+  margin-top: 100px;
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.faq h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.faq-item {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.faq-item h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.faq-item .faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+  padding: 0 20px 0 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.faq-item.active {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.faq-item.active h3 {
+  color: #4facfe;
+}
+
+.faq-item.active .faq-content {
+  max-height: 500px; /* Adjust as needed */
+  padding: 15px 20px 20px 20px;
+}
+
+.faq-item:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* ===================== */
+/* Footer Styles */
+/* ===================== */
+footer {
+  text-align: center;
+  padding: 40px 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===================== */
+/* Animation Keyframes */
+/* ===================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fadeInUp {
+  animation: slideIn 0.8s ease-out;
+}
+
+/* Enhanced Logo pulse animation with rotation and bobbing */
+@keyframes enhancedLogoPulse {
+  0% {
+    transform: scale(1) rotate(0deg) translateY(0px);
+  }
+  25% {
+    transform: scale(1.05) rotate(5deg) translateY(-5px);
+  }
+  50% {
+    transform: scale(1.1) rotate(0deg) translateY(10px);
+  }
+  75% {
+    transform: scale(1.05) rotate(-5deg) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) rotate(0deg) translateY(0px);
+  }
+}
+
+/* Button wobble animation on hover */
+@keyframes buttonWobble {
+  0% { transform: translateX(0%); }
+  25% { transform: translateX(-5%); }
+  75% { transform: translateX(5%); }
+  100% { transform: translateX(0%); }
+}
+
+/* Button gradient shift animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animated Title Text */
+@keyframes colorCycle {
+  0% { color: #ffffff; }
+  25% { color: #4facfe; }
+  50% { color: #ffffff; }
+  75% { color: #4facfe; }
+  100% { color: #ffffff; }
+}
+
+@keyframes fadeInText {
+  to { opacity: 1; }
+}
